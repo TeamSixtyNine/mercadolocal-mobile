@@ -10,6 +10,7 @@ import autenticacao from './pages/autenticacao'
 import resultadoDePesquisa from './pages/resultadoDePesquisa'
 import mlAuth from './pages/mlAuth';
 import mlAuthToken from './pages/mlAuthToken';
+import criarProduto from './pages/criarProduto'
 
 export default function Routes(){
     return(
@@ -21,6 +22,7 @@ export default function Routes(){
                 <AppStack.Screen name="resultadoDePesquisa" component={resultadoDePesquisa} />
                 <AppStack.Screen name="mlAuth" component={mlAuth} />
 				<AppStack.Screen name="mlAuthToken" component={mlAuthToken} />
+                <AppStack.Screen name="criarProduto" component={criarProduto} />
             </AppStack.Navigator>
         </NavigationContainer>
     )

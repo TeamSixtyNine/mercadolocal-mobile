@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, TextInput, Image, FlatList} from 'react-native'
+import {View, Text, TextInput, Image, FlatList, TouchableOpacity} from 'react-native'
 import {AppLoading} from 'expo'
 import {useNavigation} from '@react-navigation/native'
 import {Feather} from '@expo/vector-icons'
@@ -30,6 +30,10 @@ export default function paginaPrincipal(){
         navigation.navigate('resultadoDePesquisa', {paginaPrincipal})
     }
 
+    function criarProduto(paginaPrincipal){
+        navigation.navigate('criarProduto', {paginaPrincipal})
+    }
+
     useEffect(() => {
         loadCategorias()
     }, [])
@@ -54,6 +58,11 @@ export default function paginaPrincipal(){
                     </View>
                     <Feather name="align-justify" size={32} color="#fff" />
                 </View>
+                <TouchableOpacity
+                        onPress={() => criarProduto(paginaPrincipal)}
+                    >
+                        <Text>IR PARA CRIAR PRODUTO</Text>
+                    </TouchableOpacity>
                 <FlatList
                     data={categorias}
                     style={style.categorias}
