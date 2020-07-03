@@ -16,7 +16,7 @@ export default function welcome(){
     const navigation = useNavigation()
 
     function navigationToPaginaPrincipal(welcome){
-        navigation.navigate('paginaPrincipal', {welcome})
+        navigation.navigate('autenticacao', {welcome})
     }
 
     if(!fontsLoaded){
