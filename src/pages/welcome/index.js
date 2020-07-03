@@ -15,8 +15,12 @@ export default function welcome(){
     
     const navigation = useNavigation()
 
-    function navigationToPaginaPrincipal(welcome){
+    function navigationToAutenticacao(welcome){
         navigation.navigate('autenticacao', {welcome})
+    }
+
+    function navigationToPaginaPrincipal(welcome){
+        navigation.navigate('paginaPrincipal', {welcome})
     }
 
     if(!fontsLoaded){
@@ -39,9 +43,14 @@ export default function welcome(){
                 <View style={style.viewBTN}>
                     <TouchableOpacity
                         style={style.btn}
-                        onPress={() => navigationToPaginaPrincipal(welcome)}
+                        onPress={() => navigationToAutenticacao(welcome)}
                     >
                         <Feather name="chevron-right" size={32} color="#7A59C5" />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigationToPaginaPrincipal(welcome)}
+                    >
+                        <Text>IR PARA PÁGINA PRINCIPAL</Text>
                     </TouchableOpacity>
                 </View>
             </View>
