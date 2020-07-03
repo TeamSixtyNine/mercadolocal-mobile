@@ -1,13 +1,15 @@
-import React from 'react'
-import {NavigationContainer} from '@react-navigation/native'
-import {createStackNavigator} from '@react-navigation/stack'
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const AppStack = createStackNavigator()
+const AppStack = createStackNavigator();
 
 import Welcome from './pages/welcome'
 import PaginaPrincipal from './pages/paginaPrincipal'
 import autenticacao from './pages/autenticacao'
 import resultadoDePesquisa from './pages/resultadoDePesquisa'
+import mlAuth from './pages/mlAuth';
+import mlAuthToken from './pages/mlAuthToken';
 
 export default function Routes(){
     return(
@@ -17,6 +19,8 @@ export default function Routes(){
                 <AppStack.Screen name="autenticacao" component={autenticacao} />
                 <AppStack.Screen name="paginaPrincipal" component={PaginaPrincipal} />
                 <AppStack.Screen name="resultadoDePesquisa" component={resultadoDePesquisa} />
+                <AppStack.Screen name="mlAuth" component={mlAuth} />
+				<AppStack.Screen name="mlAuthToken" component={mlAuthToken} />
             </AppStack.Navigator>
         </NavigationContainer>
     )
