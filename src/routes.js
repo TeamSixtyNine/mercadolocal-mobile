@@ -7,6 +7,7 @@ const AppStack = createStackNavigator()
 import Welcome from './pages/welcome'
 import PaginaPrincipal from './pages/paginaPrincipal'
 import autenticacao from './pages/autenticacao'
+import resultadoDePesquisa from './pages/resultadoDePesquisa'
 
 export default function Routes(){
     return(
@@ -15,6 +16,7 @@ export default function Routes(){
                 <AppStack.Screen name="welcome" component={Welcome} />
                 <AppStack.Screen name="autenticacao" component={autenticacao} />
                 <AppStack.Screen name="paginaPrincipal" component={PaginaPrincipal} />
+                <AppStack.Screen name="resultadoDePesquisa" component={resultadoDePesquisa} />
             </AppStack.Navigator>
         </NavigationContainer>
     )

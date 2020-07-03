@@ -1,7 +1,7 @@
 var axios = require('react-native-axios');
 
 var axiosInstance = axios.create({
-	baseURL: 'http://192.168.15.5:5000',
+	baseURL: 'http://192.168.25.12:5000',
 	/* other custom settings */
 });
 

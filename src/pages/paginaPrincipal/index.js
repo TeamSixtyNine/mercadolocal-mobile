@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, TextInput, Image, FlatList} from 'react-native'
 import {AppLoading} from 'expo'
+import {useNavigation} from '@react-navigation/native'
 import {Feather} from '@expo/vector-icons'
 import {useFonts, Inter_500Medium} from '@expo-google-fonts/inter'
 import axios from 'axios'
@@ -15,12 +16,18 @@ export default function paginaPrincipal(){
     })
     const [categorias, setCategorias] = useState([])
 
+    const navigation = useNavigation()
+
     async function loadCategorias(){
         const response = await axios.get(
             'https://api.mercadolibre.com/sites/MLB/categories'
         )
 
         setCategorias(response.data)
+    }
+
+    function resultadoDePesquisa(paginaPrincipal){
+        navigation.navigate('resultadoDePesquisa', {paginaPrincipal})
     }
 
     useEffect(() => {
@@ -38,7 +45,12 @@ export default function paginaPrincipal(){
                         <TextInput
                             placeholder="Buscar produtos"
                         />
-                        <Feather name="search" size={24} color="#000" />    
+                        <Feather
+                            name="search"
+                            size={24}
+                            color="#000"
+                            onPress={() => resultadoDePesquisa(paginaPrincipal)}
+                        />    
                     </View>
                     <Feather name="align-justify" size={32} color="#fff" />
                 </View>
@@ -49,7 +61,14 @@ export default function paginaPrincipal(){
                     showsVerticalScrollIndicator={false}
                     renderItem={({item: categoria}) => (
                         <View style={style.categoria}>
-                            <Text style={style.txtResponse}>{categoria.name}</Text>
+                            <Text
+                                style={{
+                                    fontFamily: 'Inter_500Medium',
+                                    fontSize: 18,
+                                    color: '#000'
+                                }} 
+                                onPress={() => resultadoDePesquisa(paginaPrincipal)}>{categoria.name}
+                            </Text>
                         </View>
                     )}
                 />

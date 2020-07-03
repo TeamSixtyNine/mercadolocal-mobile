@@ -37,8 +37,5 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 8,
         marginVertical: 8,
-    },
-    txtResponse: {
-        fontSize: 18,
     }
 })
