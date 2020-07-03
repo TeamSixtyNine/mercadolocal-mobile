@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, TextInput, Image, FlatList} from 'react-native'
+import {AppLoading} from 'expo'
 import {Feather} from '@expo/vector-icons'
 import {useFonts, Inter_500Medium} from '@expo-google-fonts/inter'
 import axios from 'axios'
