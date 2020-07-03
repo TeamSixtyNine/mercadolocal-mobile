@@ -1,33 +1,34 @@
 import React from 'react';
 import client from '../../client';
 import { View, TextInput, Text, Button } from 'react-native';
+import { WebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+import { useNavigation } from '@react-navigation/native';
 
 import style from './style';
 
 export default function autenticacao() {
+	const navigation = useNavigation();
+
 	async function authenticate() {
 		const response = await client.post('/login');
-		console.log(response.data.authURL);
+		const { authURL } = response.data;
+
+		if (authURL) {
+			navigation.navigate('mlAuth', { redirectURL: authURL });
+		} else {
+			alert('Authentication failed.');
+		}
 	}
 
 	return (
 		<View style={style.container}>
-			<Text>Email</Text>
-			<TextInput
-				style={{ height: 40, borderColor: 'white', borderWidth: 1 }}
-			/>
-			<Text>Senha</Text>
-			<TextInput
-				style={{ height: 40, borderColor: 'white', borderWidth: 1 }}
-			/>
-
 			<Button
 				onPress={authenticate}
-				title="Learn More"
+				title="Autenticar-se"
 				color="#841584"
-				accessibilityLabel="Learn more about this purple button"
+				accessibilityLabel="Clique aqui para se autenticar"
 			/>
 		</View>
 	);
