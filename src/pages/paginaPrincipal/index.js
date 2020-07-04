@@ -25,6 +25,7 @@ export default function paginaPrincipal() {
 	});
 	const [valorSelecionado, setValorSelecionado] = useState('');
 	const [anuncios, setAnuncios] = useState([]);
+    const [search, setSearch] = useState('')
 
 	const navigation = useNavigation();
 
@@ -45,13 +46,17 @@ export default function paginaPrincipal() {
 		const response = await client.get(
 			`https://api.mercadolibre.com/sites/MLB/search?category=${categoria}&state=${locationCode}&limit=10`
 		);
-		console.log(response.data.results[0].thumbnail);
 		setAnuncios(response.data.results);
 	}
 
 	//NAVEGAÇÃO
-	function resultadoDePesquisa(paginaPrincipal) {
-		navigation.navigate('resultadoDePesquisa', { paginaPrincipal });
+	async function resultadoDePesquisa(paginaPrincipal) {
+        if(search == ''){
+            alert('Entrada vazia')
+        }else{
+            await AsyncStorage.setItem('searching', search)
+            navigation.navigate('resultadoDePesquisa', { paginaPrincipal });
+        }
 	}
 	function criarProduto(paginaPrincipal) {
 		navigation.navigate('criarProduto', { paginaPrincipal });
@@ -75,7 +80,11 @@ export default function paginaPrincipal() {
 				<View style={style.header}>
 					<Image style={style.image} source={logoImg} />
 					<View style={style.input}>
-						<TextInput placeholder="Buscar produtos" />
+                        <TextInput 
+                            placeholder="Buscar produtos"
+                            value={search}
+                            onChangeText={(text) => setSearch(text)}    
+                        />
 						<Feather
 							name="search"
 							size={24}
