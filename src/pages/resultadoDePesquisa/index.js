@@ -26,7 +26,6 @@ export default function resultadoDePesquisa(){
 
     async function loadSearch(){
         const searching = await AsyncStorage.getItem('searching');
-        console.log(searching)
         setPalavraPesquisada(searching)
 
         const response = await axios.get(

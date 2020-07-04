@@ -55,5 +55,10 @@ export default StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 8,
         borderRadius: 8
+    },
+    txtNavigator: {
+        marginLeft: 12,
+        marginVertical: 16,
+        fontSize: 20
     }
 })
