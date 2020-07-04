@@ -14,6 +14,7 @@ import criarProduto from './pages/criarProduto';
 import comprarProduto from './pages/comprarProduto';
 import verProduto from './pages/verProduto';
 import lerQrCode from './pages/lerQrCode';
+import confirmProduct from './pages/confirmProduct';
 
 export default function Routes() {
 	return (
@@ -38,6 +39,10 @@ export default function Routes() {
 				/>
 				<AppStack.Screen name="verProduto" component={verProduto} />
 				<AppStack.Screen name="lerQrCode" component={lerQrCode} />
+				<AppStack.Screen
+					name="confirmProduct"
+					component={confirmProduct}
+				/>
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);

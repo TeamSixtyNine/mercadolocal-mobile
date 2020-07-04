@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, TouchableHighlight } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
 
 import style from './style';
 
-export default function comprarProduto() {
+export default function comprarProduto({ route }) {
 	const [state, setState] = useState(false);
+
+	const { productURL, test } = route.params;
+	console.log(productURL, test);
 
 	const navigation = useNavigation();
 
@@ -14,7 +17,17 @@ export default function comprarProduto() {
 		navigation.navigate('lerQrCode');
 	}
 
-	if (!state) {
+	if (productURL) {
+		return (
+			<View style={style.webview}>
+				<WebView
+					source={{
+						uri: productURL,
+					}}
+				/>
+			</View>
+		);
+	} else if (!state) {
 		return (
 			<View style={style.container}>
 				<Text
