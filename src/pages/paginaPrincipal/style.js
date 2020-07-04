@@ -45,4 +45,15 @@ export default StyleSheet.create({
         width: 140,
         height: 140
     },
+    txtInfo: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    button: {
+        marginTop: 16,
+        backgroundColor: '#7A59C5',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 8
+    }
 })

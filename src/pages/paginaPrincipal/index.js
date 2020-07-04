@@ -53,14 +53,15 @@ export default function paginaPrincipal() {
 	function resultadoDePesquisa(paginaPrincipal) {
 		navigation.navigate('resultadoDePesquisa', { paginaPrincipal });
 	}
-
 	function criarProduto(paginaPrincipal) {
 		navigation.navigate('criarProduto', { paginaPrincipal });
 	}
-
 	function comprarProduto(paginaPrincipal) {
 		navigation.navigate('comprarProduto', { paginaPrincipal });
-	}
+    }
+    function verProduto(paginaPrincipal){
+        navigation.navigate('verProduto', {paginaPrincipal})
+    }
 
 	useEffect(() => {
 		loadAnuncios(valorSelecionado);
@@ -190,12 +191,32 @@ export default function paginaPrincipal() {
 									fontSize: 18,
 									color: '#000',
 									marginHorizontal: 12,
-									marginTop: 12,
+									marginVertical: 12,
 								}}
 								onPress={() => loadAnuncios(anuncio.id)}
 							>
 								{anuncio.title}
 							</Text>
+                            <View style={style.txtInfo}>
+                                <Text>Cidade: </Text>
+                                <Text style={{fontWeight: 'bold'}}>{anuncio.address.city_name}</Text>
+                            </View>
+                            <View style={style.txtInfo}>
+                                <Text>Preço: </Text>
+                                <Text style={{fontWeight: 'bold'}}>R$ {anuncio.price}</Text>
+                            </View>
+                            <TouchableOpacity
+                                onPress={() => verProduto(paginaPrincipal)}
+                                style={style.button}
+                            >
+                                <Text style={{
+                                    color: '#fff',
+                                    fontWeight: 'bold',
+                                    fontSize: 16}}
+                                >
+                                    VER PRODUTO
+                                </Text>
+                            </TouchableOpacity>
 						</View>
 					)}
 				/>

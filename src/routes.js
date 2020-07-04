@@ -12,6 +12,7 @@ import mlAuth from './pages/mlAuth';
 import mlAuthToken from './pages/mlAuthToken';
 import criarProduto from './pages/criarProduto';
 import comprarProduto from './pages/comprarProduto';
+import verProduto from './pages/verProduto'
 
 export default function Routes() {
 	return (
@@ -33,6 +34,10 @@ export default function Routes() {
 				<AppStack.Screen
 					name="comprarProduto"
 					component={comprarProduto}
+				/>
+                <AppStack.Screen
+					name="verProduto"
+					component={verProduto}
 				/>
 			</AppStack.Navigator>
 		</NavigationContainer>
