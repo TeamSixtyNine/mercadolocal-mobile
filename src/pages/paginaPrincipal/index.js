@@ -39,7 +39,6 @@ export default function paginaPrincipal() {
             setDrawerPosition('right')
         }
     }*/
-<<<<<<< HEAD
 	const navigationView = (
 		<View
 			style={{
@@ -53,27 +52,11 @@ export default function paginaPrincipal() {
 			<TouchableOpacity onPress={() => criarProduto(paginaPrincipal)}>
 				<Text style={style.txtNavigator}>CRIAR PRODUTO</Text>
 			</TouchableOpacity>
+			<TouchableOpacity onPress={() => welcome(paginaPrincipal)}>
+				<Text style={style.txtNavigator}>FAZER LOGOUT</Text>
+			</TouchableOpacity>
 		</View>
 	);
-=======
-    const navigationView = (
-        <View style={{
-            flex: 1,
-            alignItems: "flex-start",
-            paddingTop: 50,
-            backgroundColor: "#fff",
-            padding: 8
-        }}>
-            <TouchableOpacity onPress={() => criarProduto(paginaPrincipal)}>
-                <Text style={style.txtNavigator}>CRIAR PRODUTO</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => welcome(paginaPrincipal)}>
-                <Text style={style.txtNavigator}>FAZER LOGOUT</Text>
-            </TouchableOpacity>
-        </View>
-    )
-
->>>>>>> 38240519f373a5ab1e96e0fbe77cb65dc983bd88
 
 	// CARREGAR PRODUTOS
 	async function loadLocation() {
@@ -106,9 +89,9 @@ export default function paginaPrincipal() {
 	}
 	function criarProduto(paginaPrincipal) {
 		navigation.navigate('criarProduto', { paginaPrincipal });
-    }
-    async function welcome(paginaPrincipal) {
-        await AsyncStorage.setItem('auth', '')
+	}
+	async function welcome(paginaPrincipal) {
+		await AsyncStorage.setItem('auth', '');
 		navigation.navigate('welcome', { paginaPrincipal });
 	}
 	function comprarProduto(paginaPrincipal) {
