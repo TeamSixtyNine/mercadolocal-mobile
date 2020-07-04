@@ -31,14 +31,13 @@ export default function paginaPrincipal() {
 
 	const navigation = useNavigation();
 
-    function changeDrawerPosition() {
-        console.log('alou')
+/*    function changeDrawerPosition() {
         if(drawerPosition == 'right'){
             setDrawerPosition('left')
         }else{
             setDrawerPosition('right')
         }
-    }
+    }*/
     const navigationView = (
         <View style={{
             flex: 1,
@@ -58,6 +57,7 @@ export default function paginaPrincipal() {
             </TouchableOpacity>
         </View>
     )
+
 
 	// CARREGAR PRODUTOS
 	async function loadLocation() {
@@ -94,7 +94,9 @@ export default function paginaPrincipal() {
 	function comprarProduto(paginaPrincipal) {
 		navigation.navigate('comprarProduto', { paginaPrincipal });
     }
-    function verProduto(paginaPrincipal){
+    async function verProduto(paginaPrincipal, id_product){
+        await AsyncStorage.setItem('id_product', id_product)
+        console.log(id_product)
         navigation.navigate('verProduto', {paginaPrincipal})
     }
 
@@ -245,7 +247,7 @@ export default function paginaPrincipal() {
                                     <Text style={{fontWeight: 'bold'}}>R$ {anuncio.price}</Text>
                                 </View>
                                 <TouchableOpacity
-                                    onPress={() => verProduto(paginaPrincipal)}
+                                    onPress={() => verProduto(paginaPrincipal, anuncio.id)}
                                     style={style.button}
                                 >
                                     <Text style={{
