@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, Inter_500Medium } from '@expo-google-fonts/inter';
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios'
 
 import style from './style';
 import logoImg from '../../../assets/icon.png';
@@ -50,10 +51,12 @@ export default function paginaPrincipal() {
                 <Text style={style.txtNavigator}>CRIAR PRODUTO</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={() => comprarProduto(paginaPrincipal)}
-            >
+            <TouchableOpacity onPress={() => comprarProduto(paginaPrincipal)}>
                 <Text style={style.txtNavigator}>COMPRAR PRODUTO</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => verPerfil(paginaPrincipal)}>
+                <Text style={style.txtNavigator}>VER PERFIL</Text>
             </TouchableOpacity>
         </View>
     )
@@ -73,7 +76,7 @@ export default function paginaPrincipal() {
 	async function loadAnuncios(categoria) {
 		const locationCode = loadLocation();
 
-		const response = await client.get(
+		const response = await axios.get(
 			`https://api.mercadolibre.com/sites/MLB/search?category=${categoria}&state=${locationCode}&limit=10`
 		);
 		setAnuncios(response.data.results);
@@ -96,8 +99,10 @@ export default function paginaPrincipal() {
     }
     async function verProduto(paginaPrincipal, id_product){
         await AsyncStorage.setItem('id_product', id_product)
-        console.log(id_product)
         navigation.navigate('verProduto', {paginaPrincipal})
+    }
+    function verPerfil(paginaPrincipal){
+        navigation.navigate('verPerfil', paginaPrincipal)
     }
 
 	useEffect(() => {
@@ -234,7 +239,6 @@ export default function paginaPrincipal() {
                                         marginHorizontal: 12,
                                         marginVertical: 12,
                                     }}
-                                    onPress={() => loadAnuncios(anuncio.id)}
                                 >
                                     {anuncio.title}
                                 </Text>
