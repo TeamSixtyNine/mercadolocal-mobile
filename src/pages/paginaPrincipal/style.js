@@ -29,13 +29,20 @@ export default StyleSheet.create({
         width: 60,
         height: 60
     },
-    categorias: {
+    anuncios: {
         marginTop: 4,
-        marginLeft: -8
+        marginHorizontal: 40,
     },
-    categoria: {
+    anuncio: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 12,
         alignItems: 'center',
-        paddingVertical: 8,
-        marginVertical: 8,
-    }
+        paddingVertical: 12,
+        marginVertical: 12,
+    },
+    imageAnuncio: {
+        width: 140,
+        height: 140
+    },
 })
