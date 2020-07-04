@@ -22,6 +22,8 @@ export default function resultadoDePesquisa(){
     const [palavraPesquisada, setPalavraPesquisada] = useState('')
     const [quantResults, setQuantResults] = useState('')
 
+    const navigation = useNavigation()
+
     async function loadSearch(){
         const searching = await AsyncStorage.getItem('searching');
         console.log(searching)
@@ -32,6 +34,10 @@ export default function resultadoDePesquisa(){
         )
         setAnuncios(response.data.results)
         setQuantResults(response.data.paging.total)
+    }
+
+    function verProduto(resultadoDePesquisa){
+        navigation.navigate('verProduto', {resultadoDePesquisa})
     }
 
     useEffect(() => {
@@ -93,7 +99,7 @@ export default function resultadoDePesquisa(){
                                 <Text style={{fontWeight: 'bold'}}>R$ {anuncio.price}</Text>
                             </View>
                             <TouchableOpacity
-                                onPress={() => verProduto(paginaPrincipal)}
+                                onPress={() => verProduto(resultadoDePesquisa)}
                                 style={style.button}
                             >
                                 <Text style={{
