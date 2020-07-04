@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import style from './style';
 
-export default function mlAuth({ route, navigation }) {
-	// const navigation = useNavigation();
+export default function mlAuth({ route }) {
+	const navigation = useNavigation();
 	const { redirectURL } = route.params;
 	const [webViewURI, setWebViewURI] = useState(redirectURL);
 
@@ -14,7 +14,8 @@ export default function mlAuth({ route, navigation }) {
 		if (e.url) {
 			if (
 				e.url.includes('https://auth.mercadolivre.com.br') ||
-				e.url.includes('https://auth.mercadolibre.com')
+				e.url.includes('https://auth.mercadolibre.com') ||
+				e.url.includes('https://www.mercadolivre.com')
 			) {
 				return true;
 			} else if (e.url.includes('http://localhost:5000/?code=')) {
@@ -23,6 +24,7 @@ export default function mlAuth({ route, navigation }) {
 				});
 				return false;
 			}
+
 			return false;
 		}
 

@@ -16,6 +16,7 @@ export default function paginaPrincipal() {
 
 	const [text, setText] = useState('');
 	const [productTitle, setProductTitle] = useState('');
+	// TODO: change defaultValue to string somehow
 	const [productPrice, setProductPrice] = useState(0);
 	const [productCategory, setProductCategory] = useState('');
 	const [checkState, setCheckState] = useState(false);

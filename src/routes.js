@@ -17,6 +17,7 @@ import lerQrCode from './pages/lerQrCode';
 import confirmProduct from './pages/confirmProduct';
 import verPerfil from './pages/verPerfil';
 import verProdutosAVenda from './pages/verProdutosAVenda';
+import chatList from './pages/chatList';
 
 export default function Routes() {
 	return (
@@ -50,6 +51,7 @@ export default function Routes() {
 					name="verProdutosAVenda"
 					component={verProdutosAVenda}
 				/>
+				<AppStack.Screen name="chatList" component={chatList} />
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);
