@@ -14,6 +14,8 @@ import criarProduto from './pages/criarProduto';
 import comprarProduto from './pages/comprarProduto';
 import verProduto from './pages/verProduto';
 import lerQrCode from './pages/lerQrCode';
+import verPerfil from './pages/verPerfil'
+import verProdutosAVenda from './pages/verProdutosAVenda'
 
 export default function Routes() {
 	return (
@@ -38,6 +40,8 @@ export default function Routes() {
 				/>
 				<AppStack.Screen name="verProduto" component={verProduto} />
 				<AppStack.Screen name="lerQrCode" component={lerQrCode} />
+				<AppStack.Screen name="verPerfil" component={verPerfil} />
+				<AppStack.Screen name="verProdutosAVenda" component={verProdutosAVenda} />
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);

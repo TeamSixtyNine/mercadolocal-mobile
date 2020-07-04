@@ -51,10 +51,12 @@ export default function paginaPrincipal() {
                 <Text style={style.txtNavigator}>CRIAR PRODUTO</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={() => comprarProduto(paginaPrincipal)}
-            >
+            <TouchableOpacity onPress={() => comprarProduto(paginaPrincipal)}>
                 <Text style={style.txtNavigator}>COMPRAR PRODUTO</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => verPerfil(paginaPrincipal)}>
+                <Text style={style.txtNavigator}>VER PERFIL</Text>
             </TouchableOpacity>
         </View>
     )
@@ -98,6 +100,9 @@ export default function paginaPrincipal() {
     async function verProduto(paginaPrincipal, id_product){
         await AsyncStorage.setItem('id_product', id_product)
         navigation.navigate('verProduto', {paginaPrincipal})
+    }
+    function verPerfil(paginaPrincipal){
+        navigation.navigate('verPerfil', paginaPrincipal)
     }
 
 	useEffect(() => {
@@ -234,7 +239,6 @@ export default function paginaPrincipal() {
                                         marginHorizontal: 12,
                                         marginVertical: 12,
                                     }}
-                                    onPress={() => loadAnuncios(anuncio.id)}
                                 >
                                     {anuncio.title}
                                 </Text>

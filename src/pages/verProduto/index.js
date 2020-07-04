@@ -22,7 +22,10 @@ export default function verProduto() {
 	});
 	const [search, setSearch] = useState('')
 	const [produto, setProduto] = useState({
-		pictures:[{secure_url: ''}]
+		pictures:[{secure_url: ''}],
+		seller_address:{
+			city: ''
+		}
 	})
 	const [aux, setAux] = useState(0)
 
