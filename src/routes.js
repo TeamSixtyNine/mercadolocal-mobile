@@ -14,12 +14,9 @@ import criarProduto from './pages/criarProduto';
 import comprarProduto from './pages/comprarProduto';
 import verProduto from './pages/verProduto';
 import lerQrCode from './pages/lerQrCode';
-<<<<<<< HEAD
 import confirmProduct from './pages/confirmProduct';
-=======
-import verPerfil from './pages/verPerfil'
-import verProdutosAVenda from './pages/verProdutosAVenda'
->>>>>>> 6fa7dc4c64eca556e85358d12196412cd7ae86a9
+import verPerfil from './pages/verPerfil';
+import verProdutosAVenda from './pages/verProdutosAVenda';
 
 export default function Routes() {
 	return (
@@ -44,15 +41,15 @@ export default function Routes() {
 				/>
 				<AppStack.Screen name="verProduto" component={verProduto} />
 				<AppStack.Screen name="lerQrCode" component={lerQrCode} />
-<<<<<<< HEAD
 				<AppStack.Screen
 					name="confirmProduct"
 					component={confirmProduct}
 				/>
-=======
 				<AppStack.Screen name="verPerfil" component={verPerfil} />
-				<AppStack.Screen name="verProdutosAVenda" component={verProdutosAVenda} />
->>>>>>> 6fa7dc4c64eca556e85358d12196412cd7ae86a9
+				<AppStack.Screen
+					name="verProdutosAVenda"
+					component={verProdutosAVenda}
+				/>
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);
