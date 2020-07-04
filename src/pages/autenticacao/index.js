@@ -1,6 +1,6 @@
 import React from 'react';
 import client from '../../client';
-import { View, TextInput, Text, Button } from 'react-native';
+import { View, TextInput, Text, Button, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
@@ -11,7 +11,7 @@ import style from './style';
 export default function autenticacao() {
 	const navigation = useNavigation();
 
-	async function authenticate() {
+	(async function authenticate() {
 		const response = await client.post('/login');
 		const { authURL } = response.data;
 
@@ -20,16 +20,12 @@ export default function autenticacao() {
 		} else {
 			alert('Authentication failed.');
 		}
-	}
+	})();
 
 	return (
 		<View style={style.container}>
-			<Button
-				onPress={authenticate}
-				title="Autenticar-se"
-				color="#841584"
-				accessibilityLabel="Clique aqui para se autenticar"
-			/>
+			<Text style={style.authenticating}>Autenticando usuário</Text>
+			<ActivityIndicator size="large" color="#fff" />
 		</View>
 	);
 }

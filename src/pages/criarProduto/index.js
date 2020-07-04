@@ -12,12 +12,15 @@ import { TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function paginaPrincipal() {
+	const navigation = useNavigation();
+
 	const [text, setText] = useState('');
 	const [productTitle, setProductTitle] = useState('');
 	const [productPrice, setProductPrice] = useState(0);
 	const [productCategory, setProductCategory] = useState('');
 	const [checkState, setCheckState] = useState(false);
 	const [localTradeState, setLocalTradeState] = useState(false);
+	const [categoryID, setCategoryID] = useState('');
 	let [fontsLoaded] = useFonts({
 		Inter_500Medium,
 	});
@@ -99,6 +102,19 @@ export default function paginaPrincipal() {
 		setCheckState(!checkState);
 	}
 
+	async function predictProductCategory(productName) {
+		try {
+			const response = await client.get(
+				`/predict-category/${productName}`
+			);
+
+			// TODO: adicionar múltipla escolha para categorias adequadas
+			setProductCategory(response.data.name);
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
 	if (!fontsLoaded) {
 		return <AppLoading />;
 	} else {
@@ -110,7 +126,14 @@ export default function paginaPrincipal() {
 				<TextInput
 					style={style.titleInput}
 					placeholder="Digite o título do seu produto..."
-					onChangeText={(text) => setProductTitle(text)}
+					onChangeText={(text) => {
+						setProductTitle(text);
+						if (text.length > 3) {
+							predictProductCategory(text);
+						} else {
+							setProductCategory('');
+						}
+					}}
 					defaultValue={productTitle}
 				/>
 
@@ -118,7 +141,9 @@ export default function paginaPrincipal() {
 				<TextInput
 					style={style.titleInput}
 					placeholder="R$ 0,00"
-					onChangeText={(text) => setProductPrice(text)}
+					onChangeText={(text) => {
+						setProductPrice(text);
+					}}
 					defaultValue={productPrice}
 				/>
 

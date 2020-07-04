@@ -1,6 +1,6 @@
 import React from 'react';
 import client from '../../client';
-import { Text, View } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
 import { parse, build, omit, keep } from 'search-params';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -43,7 +43,8 @@ export default function mlAuthToken({ route, navigation }) {
 
 	return (
 		<View style={style.container}>
-			<Text style={{ color: 'white' }}>Autenticando seu usuário...</Text>
+			<Text style={style.authenticating}>Autenticando usuário</Text>
+			<ActivityIndicator size="large" color="#fff" />
 		</View>
 	);
 }
