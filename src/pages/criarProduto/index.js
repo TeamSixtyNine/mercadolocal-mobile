@@ -11,7 +11,7 @@ import logoImg from '../../../assets/icon.png';
 import { TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export default function paginaPrincipal({ route, navigation }) {
+export default function paginaPrincipal() {
 	const [text, setText] = useState('');
 	const [productTitle, setProductTitle] = useState('');
 	const [productPrice, setProductPrice] = useState(0);
