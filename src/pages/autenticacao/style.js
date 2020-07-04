@@ -9,4 +9,13 @@ export default StyleSheet.create({
 		paddingHorizontal: 24,
 		paddingTop: Constants.statusBarHeight + 20,
 	},
+
+	authenticating: {
+		color: 'white',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		alignItems: 'center',
+		marginBottom: 20,
+		// height: '100%',
+	},
 });

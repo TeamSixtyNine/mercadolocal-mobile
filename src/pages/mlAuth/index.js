@@ -10,16 +10,30 @@ export default function mlAuth({ route, navigation }) {
 	const { redirectURL } = route.params;
 	const [webViewURI, setWebViewURI] = useState(redirectURL);
 
+	function _onShouldStartLoadWithRequest(e) {
+		if (e.url) {
+			if (
+				e.url.includes('https://auth.mercadolivre.com.br') ||
+				e.url.includes('https://auth.mercadolibre.com')
+			) {
+				return true;
+			} else if (e.url.includes('http://localhost:5000/?code=')) {
+				navigation.navigate('mlAuthToken', {
+					codeURL: e.url,
+				});
+				return false;
+			}
+			return false;
+		}
+
+		return true;
+	}
+
 	return (
 		<View style={style.container}>
 			<WebView
-				source={{ uri: `${redirectURL}` }}
-				onError={(syntheticEvent) => {
-					const { nativeEvent } = syntheticEvent;
-					navigation.navigate('mlAuthToken', {
-						codeURL: nativeEvent.url,
-					});
-				}}
+				source={{ uri: `${webViewURI}` }}
+				onShouldStartLoadWithRequest={_onShouldStartLoadWithRequest}
 			/>
 		</View>
 	);
