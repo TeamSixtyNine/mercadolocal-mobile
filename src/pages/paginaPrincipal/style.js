@@ -67,7 +67,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     divBtn:{
-        marginHorizontal: 40,
+        marginHorizontal: 12,
         alignItems: 'center',
         justifyContent: 'center',
         width: 54,
@@ -75,5 +75,9 @@ export default StyleSheet.create({
         backgroundColor: '#7A59C5',
         borderRadius: 50,
         marginBottom: 4
+    },
+    txtBtn:{
+        textAlign: 'center',
+        width: 60
     }
 })
