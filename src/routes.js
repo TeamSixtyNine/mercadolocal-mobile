@@ -12,7 +12,8 @@ import mlAuth from './pages/mlAuth';
 import mlAuthToken from './pages/mlAuthToken';
 import criarProduto from './pages/criarProduto';
 import comprarProduto from './pages/comprarProduto';
-import verProduto from './pages/verProduto'
+import verProduto from './pages/verProduto';
+import lerQrCode from './pages/lerQrCode';
 
 export default function Routes() {
 	return (
@@ -35,10 +36,8 @@ export default function Routes() {
 					name="comprarProduto"
 					component={comprarProduto}
 				/>
-                <AppStack.Screen
-					name="verProduto"
-					component={verProduto}
-				/>
+				<AppStack.Screen name="verProduto" component={verProduto} />
+				<AppStack.Screen name="lerQrCode" component={lerQrCode} />
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);

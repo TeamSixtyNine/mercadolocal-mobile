@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { useNavigation } from '@react-navigation/native';
 
 import style from './style';
 
 export default function comprarProduto() {
 	const [state, setState] = useState(false);
+
+	const navigation = useNavigation();
+
+	function navigateToReadQRCode() {
+		navigation.navigate('lerQrCode');
+	}
+
 	if (!state) {
 		return (
 			<View style={style.container}>
@@ -15,6 +23,14 @@ export default function comprarProduto() {
 				>
 					Clique aqui para comprar
 				</Text>
+
+				<Button
+					onPress={navigateToReadQRCode}
+					title="Ler QR Code"
+					color="#841584"
+					accessibilityLabel="Clique aqui para ler QR Code"
+					style={style.postBtn}
+				/>
 			</View>
 		);
 	} else {
