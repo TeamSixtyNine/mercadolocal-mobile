@@ -50,14 +50,6 @@ export default function paginaPrincipal() {
             <TouchableOpacity onPress={() => criarProduto(paginaPrincipal)}>
                 <Text style={style.txtNavigator}>CRIAR PRODUTO</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => comprarProduto(paginaPrincipal)}>
-                <Text style={style.txtNavigator}>COMPRAR PRODUTO</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => verPerfil(paginaPrincipal)}>
-                <Text style={style.txtNavigator}>VER PERFIL</Text>
-            </TouchableOpacity>
         </View>
     )
 
@@ -139,6 +131,34 @@ export default function paginaPrincipal() {
                             size={32} 
                             color="#fff"
                         />
+                    </View>
+                    <View style={style.divBtns}>
+                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                            <TouchableOpacity 
+                                onPress={() => comprarProduto(paginaPrincipal)}
+                                style={style.divBtn}
+                            >
+                                <Feather
+                                    name="credit-card"
+                                    size={20}
+                                    color="#fff"
+                                />
+                            </TouchableOpacity>
+                            <Text style={style.txtBtn}>Ler QRCode</Text>
+                        </View>
+                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                            <TouchableOpacity 
+                                onPress={() => verPerfil(paginaPrincipal)}
+                                style={style.divBtn}
+                            >
+                                <Feather
+                                    name="user"
+                                    size={20}
+                                    color="#fff"
+                                />
+                            </TouchableOpacity>
+                            <Text style={style.txtBtn}>Ver perfil</Text>
+                        </View>
                     </View>
                     <Picker
                         selectedValue={valorSelecionado}

@@ -60,5 +60,20 @@ export default StyleSheet.create({
         marginLeft: 12,
         marginVertical: 16,
         fontSize: 20
+    },
+    divBtns:{
+        marginVertical: 12,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    divBtn:{
+        marginHorizontal: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 54,
+        height: 54,
+        backgroundColor: '#7A59C5',
+        borderRadius: 50,
+        marginBottom: 4
     }
 })
