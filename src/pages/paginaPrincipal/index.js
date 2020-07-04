@@ -50,6 +50,9 @@ export default function paginaPrincipal() {
             <TouchableOpacity onPress={() => criarProduto(paginaPrincipal)}>
                 <Text style={style.txtNavigator}>CRIAR PRODUTO</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => welcome(paginaPrincipal)}>
+                <Text style={style.txtNavigator}>FAZER LOGOUT</Text>
+            </TouchableOpacity>
         </View>
     )
 
@@ -85,6 +88,10 @@ export default function paginaPrincipal() {
 	}
 	function criarProduto(paginaPrincipal) {
 		navigation.navigate('criarProduto', { paginaPrincipal });
+    }
+    async function welcome(paginaPrincipal) {
+        await AsyncStorage.setItem('auth', '')
+		navigation.navigate('welcome', { paginaPrincipal });
 	}
 	function comprarProduto(paginaPrincipal) {
 		navigation.navigate('comprarProduto', { paginaPrincipal });

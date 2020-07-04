@@ -4,7 +4,8 @@ import {
 	Text,
 	TextInput,
 	Image,
-	TouchableOpacity
+	TouchableOpacity,
+	ScrollView
 } from 'react-native';
 import { AppLoading } from 'expo';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +16,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import style from './style';
 import logoImg from '../../../assets/icon.png';
 import axios from 'axios';
+
+import client from '../../client'
 
 export default function verProduto() {
 	let [fontsLoaded] = useFonts({
@@ -27,6 +30,7 @@ export default function verProduto() {
 			city: ''
 		}
 	})
+	const [extras, setExtras] = useState({})
 	const [aux, setAux] = useState(0)
 
 	async function resultadoDePesquisa(verProduto) {
@@ -45,6 +49,28 @@ export default function verProduto() {
 			`https://api.mercadolibre.com/items/${id_product}`
 		);
 		setProduto(response.data);
+
+		const dados = {
+			id_product: id_product
+		}
+		const verify = await client.post('/verify', dados)
+		
+		let retiradaLocal = ''
+		let troca = ''
+		if(verify.data.retiradaLocal){
+			retiradaLocal = 'Sim'
+		}else{
+			retiradaLocal = 'Não'
+		}
+		if(verify.data.troca){
+			troca = 'Sim'
+		}else{
+			troca = 'Não'
+		}
+		setExtras({
+			retiradaLocal: retiradaLocal,
+			troca: troca
+		})
 	}
 
 	function changeAux(direction){
@@ -92,56 +118,62 @@ export default function verProduto() {
                         color="#fff"
                     />
                 </View>
-				<View style={style.divProduto}>
-					<Text style={{
-						color: '#000',
-						fontFamily: 'Inter_500Medium',
-						fontSize: 20,
-						marginHorizontal: 20,
-						marginTop: 12
-					}}>
-						{produto.title}
-					</Text>
-					<View style={{
-						flexDirection: 'row',
-						alignItems: 'center'
-					}}>
-						<Feather
-							style={style.btnImg}
-							name="chevron-left"
-							size={32} 
-							color="#000"
-							onPress={() => changeAux('L')}
-						/>
-						<Image source={{uri: produto.pictures[aux].secure_url}} style={style.img} />
-						<Feather
-							style={style.btnImg}
-							name="chevron-right"
-							size={32} 
-							color="#000"
-							onPress={() => changeAux('R')}
-						/>
+				<ScrollView>
+					<View style={style.divProduto}>
+						<Text style={{
+							color: '#000',
+							fontFamily: 'Inter_500Medium',
+							fontSize: 20,
+							marginHorizontal: 20,
+							marginTop: 12
+						}}>
+							{produto.title}
+						</Text>
+						<View style={{
+							flexDirection: 'row',
+							alignItems: 'center'
+						}}>
+							<Feather
+								style={style.btnImg}
+								name="chevron-left"
+								size={32} 
+								color="#000"
+								onPress={() => changeAux('L')}
+							/>
+							<Image source={{uri: produto.pictures[aux].secure_url}} style={style.img} />
+							<Feather
+								style={style.btnImg}
+								name="chevron-right"
+								size={32} 
+								color="#000"
+								onPress={() => changeAux('R')}
+							/>
+						</View>
+						<View style={{flexDirection: 'column'}}>
+							<Text style={style.txt}>Preço</Text>
+							<Text style={style.txtInfo}>R$ {produto.price}</Text>
+							<Text style={style.txt}>Cidade</Text>
+							<Text style={style.txtInfo}>{produto.seller_address.city.name}</Text>
+							
+							<Text style={{fontSize: 16, marginTop: 24}}>Pagamento no momento da entrega</Text>
+							<Text style={style.txtInfo}>{extras.retiradaLocal}</Text>
+							<Text style={style.txt}>Possibilidade de troca</Text>
+							<Text style={style.txtInfo}>{extras.troca}</Text>
+							<TouchableOpacity
+								style={style.button}
+							>
+								<Text style={{
+									color: '#fff',
+									fontSize: 16,
+									textAlign: 'center'
+								}}
+								>
+									COMPRAR
+								</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
-					<View style={{
-						alignItems: 'flex-start',
-						justifyContent: 'flex-start',
-					}}>
-						<Text style={style.txt}>Preço</Text>
-						<Text style={style.txtInfo}>R$ {produto.price}</Text>
-						<Text style={style.txt}>Cidade</Text>
-						<Text style={style.txtInfo}>{produto.seller_address.city.name}</Text>
-						<TouchableOpacity
-                            style={style.button}
-                        >
-                            <Text style={{
-                                color: '#fff',
-                                fontSize: 16}}
-                            >
-                                COMPRAR
-                            </Text>
-                        </TouchableOpacity>
-					</View>
-				</View>
+				</ScrollView>
 			</View>
 		);
 	}
