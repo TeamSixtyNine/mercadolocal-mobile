@@ -133,7 +133,7 @@ export default function paginaPrincipal() {
                         />
                     </View>
                     <View style={style.divBtns}>
-                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{alignItems: 'center', justifyContent: 'flex-start'}}>
                             <TouchableOpacity 
                                 onPress={() => comprarProduto(paginaPrincipal)}
                                 style={style.divBtn}
@@ -146,7 +146,33 @@ export default function paginaPrincipal() {
                             </TouchableOpacity>
                             <Text style={style.txtBtn}>Ler QRCode</Text>
                         </View>
-                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{alignItems: 'center', justifyContent: 'flex-start'}}>
+                            <TouchableOpacity 
+                                onPress={() => {}}
+                                style={style.divBtn}
+                            >
+                                <Feather
+                                    name="shopping-bag"
+                                    size={20}
+                                    color="#fff"
+                                />
+                            </TouchableOpacity>
+                            <Text style={style.txtBtn}>Lista de espera</Text>
+                        </View>
+                        <View style={{alignItems: 'center', justifyContent: 'flex-start'}}>
+                            <TouchableOpacity 
+                                onPress={() => {}}
+                                style={style.divBtn}
+                            >
+                                <Feather
+                                    name="message-circle"
+                                    size={20}
+                                    color="#fff"
+                                />
+                            </TouchableOpacity>
+                            <Text style={style.txtBtn}>Chat</Text>
+                        </View>
+                        <View style={{alignItems: 'center', justifyContent: 'flex-start'}}>
                             <TouchableOpacity 
                                 onPress={() => verPerfil(paginaPrincipal)}
                                 style={style.divBtn}
