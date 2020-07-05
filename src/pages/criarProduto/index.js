@@ -45,7 +45,6 @@ export default function paginaPrincipal() {
 				Authorization: access_token.split('"')[1],
 			},
 		});
-		console.log(location.data)
 		const productData = {
 			post: {
 				title: productTitle,

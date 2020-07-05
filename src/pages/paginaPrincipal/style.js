@@ -12,7 +12,8 @@ export default StyleSheet.create({
         backgroundColor: '#7A59C5',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 12
     },
     input: {
         paddingVertical: 8,
@@ -62,7 +63,7 @@ export default StyleSheet.create({
         fontSize: 20
     },
     divBtns:{
-        marginVertical: 12,
+        marginBottom: 12,
         flexDirection: 'row',
         justifyContent: 'center',
     },
