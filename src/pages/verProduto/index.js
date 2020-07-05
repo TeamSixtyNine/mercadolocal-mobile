@@ -186,8 +186,6 @@ export default function verProduto() {
 						<View style={{flexDirection: 'column'}}>
 							<Text style={style.txt}>Preço</Text>
 							<Text style={style.txtInfo}>R$ {produto.price}</Text>
-							<Text style={style.txt}>Cidade</Text>
-							<Text style={style.txtInfo}>{produto.seller_address.city.name}</Text>
 							
 							<Text style={{fontSize: 16, marginTop: 24}}>Pagamento no momento da entrega</Text>
 							<Text style={style.txtInfo}>{extras.retiradaLocal}</Text>

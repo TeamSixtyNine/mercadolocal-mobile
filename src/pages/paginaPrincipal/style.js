@@ -80,6 +80,6 @@ export default StyleSheet.create({
     },
     txtBtn:{
         textAlign: 'center',
-        width: 60
+        width: 70
     }
 })
