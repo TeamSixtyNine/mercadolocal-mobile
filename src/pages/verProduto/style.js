@@ -53,5 +53,24 @@ export default StyleSheet.create({
         paddingHorizontal: 32,
         paddingVertical: 12,
         borderRadius: 8
+    },
+    divBtn:{
+        marginHorizontal: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 64,
+        height: 64,
+        backgroundColor: '#7A59C5',
+        borderRadius: 50,
+        marginBottom: 4
+    },
+    txtBtn:{
+        textAlign: 'center',
+        width: 70
+    },
+    divBtns:{
+        marginBottom: 12,
+        flexDirection: 'row',
+        justifyContent: 'center',
     }
 })

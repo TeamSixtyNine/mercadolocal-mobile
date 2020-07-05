@@ -123,6 +123,10 @@ export default function verProduto() {
 		}
 	}
 
+	function chatList(verProduto){
+		
+	}
+
 	useEffect(() => {
 		loadProduto()
 	}, [])
@@ -191,25 +195,53 @@ export default function verProduto() {
 							<Text style={style.txtInfo}>{extras.retiradaLocal}</Text>
 							<Text style={style.txt}>Possibilidade de troca</Text>
 							<Text style={style.txtInfo}>{extras.troca}</Text>
-							<TouchableOpacity
-								style={style.button}
-								onPress={() => analisarProduto(
-									produto.id,
-									produto.permalink,
-									produto.seller_id,
-									extras.retiradaLocal,
-									extras.troca
-								)}
-							>
-								<Text style={{
-									color: '#fff',
-									fontSize: 16,
-									textAlign: 'center'
-								}}
+							
+							<View style={style.divBtns}>
+								<View
+									style={{
+										alignItems: 'center',
+										justifyContent: 'flex-start',
+									}}
 								>
-									COMPRAR
-								</Text>
-							</TouchableOpacity>
+									<TouchableOpacity
+										onPress={() => analisarProduto(
+											produto.id,
+											produto.permalink,
+											produto.seller_id,
+											extras.retiradaLocal,
+											extras.troca
+										)}
+										style={style.divBtn}
+									>
+										<Feather
+											name="shopping-cart"
+											size={20}
+											color="#fff"
+										/>
+									</TouchableOpacity>
+									<Text style={style.txtBtn}>Comprar</Text>
+								</View>
+								<View
+									style={{
+										alignItems: 'center',
+										justifyContent: 'flex-start',
+									}}
+								>
+									<TouchableOpacity
+										onPress={() => {
+											chatList(verProduto);
+										}}
+										style={style.divBtn}
+									>
+										<Feather
+											name="message-circle"
+											size={20}
+											color="#fff"
+										/>
+									</TouchableOpacity>
+									<Text style={style.txtBtn}>Chat</Text>
+								</View>
+							</View>
 						</View>
 					</View>
 				</ScrollView>
