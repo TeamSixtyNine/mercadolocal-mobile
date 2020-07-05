@@ -55,7 +55,6 @@ export default function verProduto() {
 			id_product: id_product
 		}
 		const verify = await client.post('/verify', dados)
-		
 		let retiradaLocal = ''
 		let troca = ''
 		if(verify.data.retiradaLocal){
@@ -74,7 +73,8 @@ export default function verProduto() {
 		})
 	}
 
-	function changeAux(direction){
+	async function changeAux(direction){
+		
 		if(direction == 'L'){
 			if(aux > 0){
 				setAux(aux-1)
@@ -90,19 +90,31 @@ export default function verProduto() {
 		}
 	}
 
-	async function analisarProduto(id, link, retiradaLocal, troca){
-		if(retiradaLocal == 'Sim' || troca == 'Sim'){
-			const access_token = await AsyncStorage.getItem('auth');
-			const data = {
-				id: id
-			}
-			await client.post('/addProductList', data, {
-				headers: {
-					Authorization: access_token.split('"')[1],
-				},
-			})
+	async function loadPerfil(){
+		const access_token = await AsyncStorage.getItem('auth');
+		const response = await axios.get(
+			`https://api.mercadolibre.com/users/me?access_token=${access_token.split('"')[1]}`
+		);
+        return response.data.id
+	}
+	async function analisarProduto(id, link, seller_id, retiradaLocal, troca){
+		const user_id = await loadPerfil()
+		if(seller_id == user_id){
+			alert('Não é possível comprar seu próprio produto anunciado')
 		}else{
-			Linking.openURL(`${link}`)
+			if(retiradaLocal == 'Sim' || troca == 'Sim'){
+				const access_token = await AsyncStorage.getItem('auth');
+				const data = {
+					id: id
+				}
+				await client.post('/addProductList', data, {
+					headers: {
+						Authorization: access_token.split('"')[1],
+					},
+				})
+			}else{
+				Linking.openURL(`${link}`)
+			}
 		}
 	}
 
@@ -179,7 +191,11 @@ export default function verProduto() {
 							<TouchableOpacity
 								style={style.button}
 								onPress={() => analisarProduto(
-									produto.id, produto.permalink, extras.retiradaLocal, extras.troca
+									produto.id,
+									produto.permalink,
+									produto.seller_id,
+									extras.retiradaLocal,
+									extras.troca
 								)}
 							>
 								<Text style={{

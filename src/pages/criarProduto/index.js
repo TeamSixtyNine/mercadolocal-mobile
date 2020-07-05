@@ -38,8 +38,14 @@ export default function paginaPrincipal() {
 	function navigateToHomePage() {
 		navigation.navigate('paginaPrincipal');
 	}
-
 	async function postProduct() {
+		const access_token = await AsyncStorage.getItem('auth');
+		const location = await client.get('/getLocation', {
+			headers: {
+				Authorization: access_token.split('"')[1],
+			},
+		});
+		console.log(location.data)
 		const productData = {
 			post: {
 				title: productTitle,
@@ -52,6 +58,9 @@ export default function paginaPrincipal() {
 				condition: 'new',
 				description: {
 					plain_text: `Lorem ipsum ${productTitle}`,
+				},
+				seller_address: {
+					state_id: location.data
 				},
 				video_id: 'YOUTUBE_ID_HERE',
 				sale_terms: [
