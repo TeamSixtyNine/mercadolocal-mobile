@@ -20,6 +20,7 @@ import verProdutosAVenda from './pages/verProdutosAVenda';
 import chatList from './pages/chatList';
 import listaDeEspera from './pages/listaDeEspera';
 import afterCheckout from './pages/afterCheckout';
+import chatWithUser from './pages/chatWithUser';
 
 export default function Routes() {
 	return (
@@ -62,6 +63,7 @@ export default function Routes() {
 					name="afterCheckout"
 					component={afterCheckout}
 				/>
+				<AppStack.Screen name="chatWithUser" component={chatWithUser} />
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);
