@@ -1,12 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-
 import style from './style';
 
-export default function afterCheckout({ navigation, route }) {
+export default function afterCheckout({ route }) {
+	const { productInfo } = route.params;
+	console.log(productInfo);
+
 	return (
-		<View>
-			<Text>is all the q3opkjiwdja</Text>
+		<View style={style.container}>
+			<Text style={style.afterCheckoutTitle}>
+				Você acabou de comprar {productInfo.title}
+			</Text>
 		</View>
 	);
 }

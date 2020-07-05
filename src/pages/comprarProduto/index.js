@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TouchableHighlight } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import { Overlay } from 'react-native-elements';
-
+import { useNavigation } from '@react-navigation/native';
 import style from './style';
 
 export default function comprarProduto({ route }) {
@@ -11,7 +11,6 @@ export default function comprarProduto({ route }) {
 	const [visibilityState, setVisibilityState] = useState(false);
 
 	const { productURL, productInfo } = route.params;
-	console.log(productURL, productInfo);
 
 	const navigation = useNavigation();
 
@@ -20,7 +19,7 @@ export default function comprarProduto({ route }) {
 	}
 
 	function navigateToAfterCheckout() {
-		navigation.navigate('afterCheckout', { productInfo: productInfo });
+		navigation.navigate('afterCheckout', { productInfo });
 	}
 
 	if (productURL) {
@@ -53,7 +52,7 @@ export default function comprarProduto({ route }) {
 							event.nativeEvent.data.includes('congrats/approved')
 						) {
 							setTimeout(function () {
-								navigateToMainPage(productInfo);
+								navigateToAfterCheckout();
 							}, 2000);
 						}
 					}}

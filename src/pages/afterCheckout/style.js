@@ -11,6 +11,12 @@ export default StyleSheet.create({
 		paddingTop: Constants.statusBarHeight + 20,
 	},
 
+	afterCheckoutTitle: {
+		color: 'white',
+		fontFamily: 'Inter_500Medium',
+		fontSize: 20,
+	},
+
 	overlayText: {
 		color: 'black',
 		fontFamily: 'Inter_500Medium',

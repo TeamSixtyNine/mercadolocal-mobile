@@ -3,16 +3,13 @@ import style from './style';
 import { View, Text, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import client from '../../client';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-export default function lerQrCode() {
+export default function lerQrCode({ navigation }) {
 	const [hasPermission, setHasPermission] = useState(null);
 	const [scanned, setScanned] = useState(false);
 	const [spinner, setSpinner] = useState(false);
-
-	const navigation = useNavigation();
 
 	useEffect(() => {
 		(async () => {
@@ -24,7 +21,6 @@ export default function lerQrCode() {
 	const getProductInfo = async (id) => {
 		try {
 			const response = await client.post(`/preview/${id}`);
-			// console.log(response);
 			return response;
 		} catch (err) {
 			console.error('Could not get product info. Error: ', err);
@@ -32,15 +28,14 @@ export default function lerQrCode() {
 	};
 
 	function navigateToConfirmProduct(info) {
+		console.log(info);
 		navigation.navigate('confirmProduct', { productInfo: info });
-		// console.log(info.title, info.price);
 	}
 
 	const handleBarCodeScanned = async ({ type, data }) => {
 		setScanned(true);
 		if (data) {
 			const productInfo = await getProductInfo(data);
-
 			if (productInfo.data) {
 				navigateToConfirmProduct(productInfo.data);
 			}

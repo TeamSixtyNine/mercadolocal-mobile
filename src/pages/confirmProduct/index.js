@@ -10,7 +10,10 @@ export default function confirmProduct({ route, navigation }) {
 	const { productInfo } = route.params;
 
 	function navigateToComprarProduto(mpCheckout) {
-		navigation.navigate('comprarProduto', { productURL: mpCheckout });
+		navigation.navigate('comprarProduto', {
+			productURL: mpCheckout,
+			productInfo,
+		});
 	}
 
 	async function buyProduct() {

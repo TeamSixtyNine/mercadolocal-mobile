@@ -3,14 +3,11 @@ import client from '../../client';
 import { Text, View, ActivityIndicator } from 'react-native';
 import { parse, build, omit, keep } from 'search-params';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import axios from 'axios'
+import axios from 'axios';
 
 import style from './style';
 
 export default function mlAuthToken({ route, navigation }) {
-	// const navigation = useNavigation();
-
 	const storeData = async (key, value) => {
 		try {
 			await AsyncStorage.setItem(key, value);
@@ -19,28 +16,30 @@ export default function mlAuthToken({ route, navigation }) {
 		}
 	};
 
-	async function loadPerfil(){
+	async function loadPerfil() {
 		const access_token = await AsyncStorage.getItem('auth');
 		const response = await axios.get(
-			`https://api.mercadolibre.com/users/me?access_token=${access_token.split('"')[1]}`
+			`https://api.mercadolibre.com/users/me?access_token=${
+				access_token.split('"')[1]
+			}`
 		);
-        return response.data.id
+		return response.data.id;
 	}
-	async function checkUser(){
+	async function checkUser() {
 		const access_token = await AsyncStorage.getItem('auth');
-		const id_user = await loadPerfil()
-		console.log(id_user)
+		const id_user = await loadPerfil();
+		console.log(id_user);
 		const data = {
-			id: id_user
-		}
+			id: id_user,
+		};
 		await client.post('/checkUser', data, {
-			headers:{
-				Authorization: access_token.split('"')[1]
-			}
-		})
+			headers: {
+				Authorization: access_token.split('"')[1],
+			},
+		});
 	}
 	function navigateToHomePage() {
-		checkUser()
+		checkUser();
 		navigation.navigate('paginaPrincipal');
 	}
 

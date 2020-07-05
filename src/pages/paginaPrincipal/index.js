@@ -10,7 +10,6 @@ import {
 	DrawerLayoutAndroid,
 } from 'react-native';
 import { AppLoading } from 'expo';
-import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, Inter_500Medium } from '@expo-google-fonts/inter';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -21,7 +20,7 @@ import logoImg from '../../../assets/icon.png';
 
 import client from '../../client';
 
-export default function paginaPrincipal() {
+export default function paginaPrincipal({ route, navigation }) {
 	let [fontsLoaded] = useFonts({
 		Inter_500Medium,
 	});
@@ -29,8 +28,6 @@ export default function paginaPrincipal() {
 	const [anuncios, setAnuncios] = useState([]);
 	const [search, setSearch] = useState('');
 	const [drawerPosition, setDrawerPosition] = useState('right');
-
-	const navigation = useNavigation();
 
 	/*    function changeDrawerPosition() {
         if(drawerPosition == 'right'){
@@ -71,7 +68,7 @@ export default function paginaPrincipal() {
 	}
 	async function loadAnuncios(categoria) {
 		const locationCode = await loadLocation();
-		console.log(locationCode.data)
+		console.log(locationCode.data);
 		const response = await axios.get(
 			`https://api.mercadolibre.com/sites/MLB/search?category=${categoria}&state=${locationCode.data}&limit=10`
 		);
@@ -106,9 +103,9 @@ export default function paginaPrincipal() {
 	}
 	function chatList(paginaPrincipal) {
 		navigation.navigate('chatList');
-    }
-    function listaDeEspera(paginaPrincipal) {
-		navigation.navigate('listaDeEspera', {paginaPrincipal});
+	}
+	function listaDeEspera(paginaPrincipal) {
+		navigation.navigate('listaDeEspera', { paginaPrincipal });
 	}
 
 	useEffect(() => {
@@ -132,7 +129,7 @@ export default function paginaPrincipal() {
 								placeholder="Buscar produtos"
 								value={search}
 								onChangeText={(text) => setSearch(text)}
-								style={{width:130}}
+								style={{ width: 130 }}
 							/>
 							<Feather
 								name="search"
