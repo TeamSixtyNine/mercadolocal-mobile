@@ -66,17 +66,6 @@ export default function verPerfil() {
                             PRODUTOS A VENDA
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        style={style.button}
-                    >
-                        <Text style={{
-                            color: '#fff',
-                            fontWeight: 'bold',
-                            fontSize: 14}}
-                        >
-                            PRODUTOS NA LISTA DE ESPERA
-                        </Text>
-                    </TouchableOpacity>
                 </View>
                 <View style={style.divInfo}>
                     <Text style={style.txt}>E-mail</Text>

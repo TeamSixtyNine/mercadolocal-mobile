@@ -39,7 +39,7 @@ export default StyleSheet.create({
         fontSize: 16
     },
     txtInfo:{
-        fontSize: 24,
+        fontSize: 18,
         marginBottom: 20
     },
     divBtns:{
