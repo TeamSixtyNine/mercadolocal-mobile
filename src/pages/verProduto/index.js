@@ -105,13 +105,18 @@ export default function verProduto() {
 			if(retiradaLocal == 'Sim' || troca == 'Sim'){
 				const access_token = await AsyncStorage.getItem('auth');
 				const data = {
-					id: id
+					id_product: id
 				}
-				await client.post('/addProductList', data, {
-					headers: {
-						Authorization: access_token.split('"')[1],
-					},
-				})
+				try{
+					alert('Produto adicionado a lista de espera do vendedor!')
+					await client.post('/addProductList', data, {
+						headers: {
+							Authorization: access_token.split('"')[1],
+						},
+					})
+				}catch(err){
+					console.error(err)
+				}
 			}else{
 				Linking.openURL(`${link}`)
 			}

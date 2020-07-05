@@ -20,6 +20,7 @@ import verProdutosAVenda from './pages/verProdutosAVenda';
 import chatList from './pages/chatList';
 import listaDeEspera from './pages/listaDeEspera';
 import afterCheckout from './pages/afterCheckout';
+import gerarQRCode from './pages/gerarQRCode'
 
 export default function Routes() {
 	return (
@@ -61,6 +62,10 @@ export default function Routes() {
 				<AppStack.Screen
 					name="afterCheckout"
 					component={afterCheckout}
+				/>
+				<AppStack.Screen
+					name="gerarQRCode"
+					component={gerarQRCode}
 				/>
 			</AppStack.Navigator>
 		</NavigationContainer>
