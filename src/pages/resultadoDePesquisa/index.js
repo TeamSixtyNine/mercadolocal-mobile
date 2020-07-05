@@ -12,6 +12,8 @@ import { useFonts, Inter_500Medium } from '@expo-google-fonts/inter';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
+import client from '../../client';
+
 import style from './style';
 
 export default function resultadoDePesquisa(){
@@ -24,12 +26,25 @@ export default function resultadoDePesquisa(){
 
     const navigation = useNavigation()
 
+
+    async function loadLocation() {
+		const access_token = await AsyncStorage.getItem('auth');
+		const location = await client.get('/getLocation', {
+			headers: {
+				Authorization: access_token.split('"')[1],
+			},
+		});
+
+		return location;
+    }
+    
     async function loadSearch(){
         const searching = await AsyncStorage.getItem('searching');
+        const locationCode = await loadLocation();
+        console.log(locationCode.data)
         setPalavraPesquisada(searching)
-
         const response = await axios.get(
-            `https://api.mercadolibre.com/sites/MLB/search?q=${searching}&limit=10`
+            `https://api.mercadolibre.com/sites/MLB/search?q=${searching}&state=${locationCode.data}`
         )
         setAnuncios(response.data.results)
         setQuantResults(response.data.paging.total)
@@ -55,6 +70,13 @@ export default function resultadoDePesquisa(){
                     alignItems: 'center'
                 }}>
                     <Text style={style.txtResult}>{palavraPesquisada}</Text>
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    marginHorizontal: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
                     <Text style={style.txt}> gerou um total de</Text>
                 </View>
                 <View style={{

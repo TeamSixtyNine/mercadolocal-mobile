@@ -5,7 +5,8 @@ import {
 	TextInput,
 	Image,
 	TouchableOpacity,
-	ScrollView
+	ScrollView,
+	Linking
 } from 'react-native';
 import { AppLoading } from 'expo';
 import { useNavigation } from '@react-navigation/native';
@@ -89,6 +90,22 @@ export default function verProduto() {
 		}
 	}
 
+	async function analisarProduto(id, link, retiradaLocal, troca){
+		if(retiradaLocal == 'Sim' || troca == 'Sim'){
+			const access_token = await AsyncStorage.getItem('auth');
+			const data = {
+				id: id
+			}
+			await client.post('/addProductList', data, {
+				headers: {
+					Authorization: access_token.split('"')[1],
+				},
+			})
+		}else{
+			Linking.openURL(`${link}`)
+		}
+	}
+
 	useEffect(() => {
 		loadProduto()
 	}, [])
@@ -161,6 +178,9 @@ export default function verProduto() {
 							<Text style={style.txtInfo}>{extras.troca}</Text>
 							<TouchableOpacity
 								style={style.button}
+								onPress={() => analisarProduto(
+									produto.id, produto.permalink, extras.retiradaLocal, extras.troca
+								)}
 							>
 								<Text style={{
 									color: '#fff',
