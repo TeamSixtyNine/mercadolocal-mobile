@@ -39,9 +39,32 @@ export default function resultadoDePesquisa(){
 
 		return location;
     }
-    
-    async function loadSearch(){
+    async function loadSearchDB(){
         const access_token = await AsyncStorage.getItem('auth');
+        const searching = await AsyncStorage.getItem('searching');
+        const locationCode = await loadLocation();
+
+        const responseDB = await client.get(
+            `/search/${searching.replace(/ /g, '@')}/${locationCode.data}`
+        )
+        let url = ''
+        console.log(responseDB)
+
+        if(responseDB.data.length != 0){
+            responseDB.data.forEach((id) => {
+                url += `${id},`
+            })
+            console.log(url)
+            const result = await axios.get(
+                `https://api.mercadolibre.com//items?ids=
+                ${url}
+                &access_token=${access_token.split('"')[1]}
+                `
+            )
+            setAnunciosDB(result.data)
+        }
+    }
+    async function loadSearch(){
         const searching = await AsyncStorage.getItem('searching');
         const locationCode = await loadLocation();
         
@@ -50,27 +73,14 @@ export default function resultadoDePesquisa(){
             `https://api.mercadolibre.com/sites/MLB/search?q=${searching}&state=${locationCode.data}&limit=10`
         )
 
-        const responseDB = await client.get(
-            `/search/${searching.replace(/ /g, '@')}`
-        )
-        let url = ''
-        responseDB.data.forEach((id) => {
-            url += `${id},`
-        })
-        // Fazer requisição de acordo com o endereço
-        const result = await axios.get(
-            `https://api.mercadolibre.com//items?ids=
-            ${url}
-            &access_token=${access_token.split('"')[1]}
-            `
-        )
-        console.log(result.data[0].body.seller_address)
-        setAnunciosDB(result.data)
         setAnuncios(response.data.results)
         setQuantResults(response.data.paging.total)
+
+        await loadSearchDB()
     }
 
-    function verProduto(resultadoDePesquisa){
+    async function verProduto(resultadoDePesquisa, id_product){
+        await AsyncStorage.setItem('id_product', id_product);
         navigation.navigate('verProduto', {resultadoDePesquisa})
     }
 
@@ -132,15 +142,11 @@ export default function resultadoDePesquisa(){
                                     {anuncioDB.body.title}
                                 </Text>
                                 <View style={style.txtInfo}>
-                                    <Text>Cidade: </Text>
-                                    <Text style={{fontWeight: 'bold'}}>{anuncioDB.body.seller_address.address_line}</Text>
-                                </View>
-                                <View style={style.txtInfo}>
                                     <Text>Preço: </Text>
                                     <Text style={{fontWeight: 'bold'}}>R$ {anuncioDB.body.price}</Text>
                                 </View>
                                 <TouchableOpacity
-                                    onPress={() => verProduto(resultadoDePesquisa)}
+                                    onPress={() => verProduto(resultadoDePesquisa, anuncioDB.body.id)}
                                     style={style.button}
                                 >
                                     <Text style={{
@@ -173,20 +179,15 @@ export default function resultadoDePesquisa(){
                                         marginHorizontal: 12,
                                         marginVertical: 12,
                                     }}
-                                    onPress={() => loadAnuncios(anuncio.id)}
                                 >
                                     {anuncio.title}
                                 </Text>
-                                <View style={style.txtInfo}>
-                                    <Text>Cidade: </Text>
-                                    <Text style={{fontWeight: 'bold'}}>{anuncio.address.city_name}</Text>
-                                </View>
                                 <View style={style.txtInfo}>
                                     <Text>Preço: </Text>
                                     <Text style={{fontWeight: 'bold'}}>R$ {anuncio.price}</Text>
                                 </View>
                                 <TouchableOpacity
-                                    onPress={() => verProduto(resultadoDePesquisa)}
+                                    onPress={() => verProduto(resultadoDePesquisa, anuncio.id)}
                                     style={style.button}
                                 >
                                     <Text style={{
