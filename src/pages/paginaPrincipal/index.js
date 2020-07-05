@@ -108,7 +108,6 @@ export default function paginaPrincipal({ route, navigation }) {
 							}
 						/>
 					</View>
-					<Feather name="chevrons-left" size={32} color="#fff" />
 				</View>
 				<View style={style.divBtns}>
 					<View

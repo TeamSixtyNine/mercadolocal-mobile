@@ -11,11 +11,12 @@ export default StyleSheet.create({
         paddingBottom: 12,
         backgroundColor: '#7A59C5',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 12
     },
     input: {
+        marginLeft: 12,
         paddingVertical: 8,
         paddingHorizontal: 8,
         flexDirection: 'row',
@@ -26,7 +27,7 @@ export default StyleSheet.create({
         borderRadius: 8
     },
     image: {
-        marginHorizontal: -8,
+        marginRight: 12,
         width: 60,
         height: 60
     },
