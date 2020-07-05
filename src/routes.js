@@ -18,7 +18,8 @@ import confirmProduct from './pages/confirmProduct';
 import verPerfil from './pages/verPerfil';
 import verProdutosAVenda from './pages/verProdutosAVenda';
 import chatList from './pages/chatList';
-import listaDeEspera from './pages/listaDeEspera'
+import listaDeEspera from './pages/listaDeEspera';
+import afterCheckout from './pages/afterCheckout';
 
 export default function Routes() {
 	return (
@@ -53,7 +54,14 @@ export default function Routes() {
 					component={verProdutosAVenda}
 				/>
 				<AppStack.Screen name="chatList" component={chatList} />
-				<AppStack.Screen name="listaDeEspera" component={listaDeEspera} />
+				<AppStack.Screen
+					name="listaDeEspera"
+					component={listaDeEspera}
+				/>
+				<AppStack.Screen
+					name="afterCheckout"
+					component={afterCheckout}
+				/>
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);

@@ -2,19 +2,25 @@ import React, { useState } from 'react';
 import { View, Text, Button, TouchableHighlight } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
+import { Overlay } from 'react-native-elements';
 
 import style from './style';
 
 export default function comprarProduto({ route }) {
 	const [state, setState] = useState(false);
+	const [visibilityState, setVisibilityState] = useState(false);
 
-	const { productURL, test } = route.params;
-	console.log(productURL, test);
+	const { productURL, productInfo } = route.params;
+	console.log(productURL, productInfo);
 
 	const navigation = useNavigation();
 
 	function navigateToReadQRCode() {
 		navigation.navigate('lerQrCode');
+	}
+
+	function navigateToAfterCheckout() {
+		navigation.navigate('afterCheckout', { productInfo: productInfo });
 	}
 
 	if (productURL) {
@@ -23,6 +29,33 @@ export default function comprarProduto({ route }) {
 				<WebView
 					source={{
 						uri: productURL,
+					}}
+					injectedJavaScript={`
+						(function() {
+						function wrap(fn) {
+							return function wrapper() {
+							var res = fn.apply(this, arguments);
+							window.ReactNativeWebView.postMessage(window.location.href);
+							return res;
+							}
+						}
+						history.pushState = wrap(history.pushState);
+						history.replaceState = wrap(history.replaceState);
+						window.addEventListener('popstate', function() {
+							window.ReactNativeWebView.postMessage(window.location.href);
+						});
+						})();
+						true;
+					`}
+					onMessage={(event) => {
+						console.log(event.nativeEvent.data);
+						if (
+							event.nativeEvent.data.includes('congrats/approved')
+						) {
+							setTimeout(function () {
+								navigateToMainPage(productInfo);
+							}, 2000);
+						}
 					}}
 				/>
 			</View>
