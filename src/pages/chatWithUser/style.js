@@ -8,7 +8,6 @@ export default StyleSheet.create({
 		flex: 1,
 		width: '100%',
 		backgroundColor: '#7A59C5',
-		paddingHorizontal: 24,
 		paddingTop: Constants.statusBarHeight + 20,
 	},
 
@@ -36,5 +35,11 @@ export default StyleSheet.create({
 		marginLeft: 10,
 		fontSize: 15,
 		color: 'white',
+	},
+
+	user: {
+		paddingHorizontal: 24,
+		color: 'white',
+		fontSize: 15,
 	},
 });
