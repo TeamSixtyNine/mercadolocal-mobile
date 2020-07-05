@@ -57,6 +57,11 @@ export default function listaDeEspera(){
         setAnuncios(result.data)
     }
 
+    async function gerarQRCode(listaDeEspera, id_product){
+        await AsyncStorage.setItem('id_product', id_product);
+        navigation.navigate('gerarQRCode', {listaDeEspera})
+    }
+
     useEffect(() => {
         loadAnunciosID()
     }, [])
@@ -98,7 +103,7 @@ export default function listaDeEspera(){
                                 {anuncio.body.title}
                             </Text>
                             <TouchableOpacity
-                                onPress={() => {}}
+                                onPress={() => {gerarQRCode(listaDeEspera, anuncio.body.id)}}
                                 style={style.button}
                             >
                                 <Text style={{

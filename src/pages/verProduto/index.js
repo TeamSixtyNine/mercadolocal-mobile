@@ -105,13 +105,18 @@ export default function verProduto() {
 			if(retiradaLocal == 'Sim' || troca == 'Sim'){
 				const access_token = await AsyncStorage.getItem('auth');
 				const data = {
-					id: id
+					id_product: id
 				}
-				await client.post('/addProductList', data, {
-					headers: {
-						Authorization: access_token.split('"')[1],
-					},
-				})
+				try{
+					alert('Produto adicionado a lista de espera do vendedor!')
+					await client.post('/addProductList', data, {
+						headers: {
+							Authorization: access_token.split('"')[1],
+						},
+					})
+				}catch(err){
+					console.error(err)
+				}
 			}else{
 				Linking.openURL(`${link}`)
 			}
@@ -181,8 +186,6 @@ export default function verProduto() {
 						<View style={{flexDirection: 'column'}}>
 							<Text style={style.txt}>Preço</Text>
 							<Text style={style.txtInfo}>R$ {produto.price}</Text>
-							<Text style={style.txt}>Cidade</Text>
-							<Text style={style.txtInfo}>{produto.seller_address.city.name}</Text>
 							
 							<Text style={{fontSize: 16, marginTop: 24}}>Pagamento no momento da entrega</Text>
 							<Text style={style.txtInfo}>{extras.retiradaLocal}</Text>

@@ -45,7 +45,9 @@ export default function paginaPrincipal() {
 				Authorization: access_token.split('"')[1],
 			},
 		});
-		console.log(location.data)
+		const userInfo = await axios.get(
+			`https://api.mercadolibre.com/users/me?access_token=${access_token.split('"')[1]}`
+		);
 		const productData = {
 			post: {
 				title: productTitle,
@@ -60,7 +62,10 @@ export default function paginaPrincipal() {
 					plain_text: `Lorem ipsum ${productTitle}`,
 				},
 				seller_address: {
-					state_id: location.data
+					state_id: location.data,
+					city:{
+						name: userInfo.data.address.city
+					}
 				},
 				video_id: 'YOUTUBE_ID_HERE',
 				sale_terms: [

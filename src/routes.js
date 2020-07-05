@@ -21,6 +21,7 @@ import chatList from './pages/chatList';
 import listaDeEspera from './pages/listaDeEspera';
 import afterCheckout from './pages/afterCheckout';
 import chatWithUser from './pages/chatWithUser';
+import gerarQRCode from './pages/gerarQRCode';
 
 export default function Routes() {
 	return (
@@ -64,6 +65,7 @@ export default function Routes() {
 					component={afterCheckout}
 				/>
 				<AppStack.Screen name="chatWithUser" component={chatWithUser} />
+				<AppStack.Screen name="gerarQRCode" component={gerarQRCode} />
 			</AppStack.Navigator>
 		</NavigationContainer>
 	);

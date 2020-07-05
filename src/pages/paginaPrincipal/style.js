@@ -11,10 +11,12 @@ export default StyleSheet.create({
         paddingBottom: 12,
         backgroundColor: '#7A59C5',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 12
     },
     input: {
+        marginLeft: 12,
         paddingVertical: 8,
         paddingHorizontal: 8,
         flexDirection: 'row',
@@ -25,7 +27,7 @@ export default StyleSheet.create({
         borderRadius: 8
     },
     image: {
-        marginHorizontal: -8,
+        marginRight: 12,
         width: 60,
         height: 60
     },
@@ -62,7 +64,7 @@ export default StyleSheet.create({
         fontSize: 20
     },
     divBtns:{
-        marginVertical: 12,
+        marginBottom: 12,
         flexDirection: 'row',
         justifyContent: 'center',
     },
@@ -78,6 +80,6 @@ export default StyleSheet.create({
     },
     txtBtn:{
         textAlign: 'center',
-        width: 60
+        width: 70
     }
 })
