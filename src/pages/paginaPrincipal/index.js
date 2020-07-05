@@ -104,9 +104,11 @@ export default function paginaPrincipal() {
 	function verPerfil(paginaPrincipal) {
 		navigation.navigate('verPerfil', paginaPrincipal);
 	}
-
 	function chatList(paginaPrincipal) {
 		navigation.navigate('chatList');
+    }
+    function listaDeEspera(paginaPrincipal) {
+		navigation.navigate('listaDeEspera', {paginaPrincipal});
 	}
 
 	useEffect(() => {
@@ -168,7 +170,7 @@ export default function paginaPrincipal() {
 							}}
 						>
 							<TouchableOpacity
-								onPress={() => {}}
+								onPress={() => listaDeEspera(paginaPrincipal)}
 								style={style.divBtn}
 							>
 								<Feather
