@@ -70,10 +70,10 @@ export default function paginaPrincipal() {
 		return location;
 	}
 	async function loadAnuncios(categoria) {
-		const locationCode = loadLocation();
-
+		const locationCode = await loadLocation();
+		console.log(locationCode.data)
 		const response = await axios.get(
-			`https://api.mercadolibre.com/sites/MLB/search?category=${categoria}&state=${locationCode}&limit=10`
+			`https://api.mercadolibre.com/sites/MLB/search?category=${categoria}&state=${locationCode.data}&limit=10`
 		);
 		setAnuncios(response.data.results);
 	}
@@ -132,6 +132,7 @@ export default function paginaPrincipal() {
 								placeholder="Buscar produtos"
 								value={search}
 								onChangeText={(text) => setSearch(text)}
+								style={{width:130}}
 							/>
 							<Feather
 								name="search"
