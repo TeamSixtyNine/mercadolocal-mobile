@@ -64,8 +64,8 @@ export default function paginaPrincipal({ route, navigation }) {
 		await AsyncStorage.setItem('auth', '');
 		navigation.navigate('welcome', { paginaPrincipal });
 	}
-	function comprarProduto(paginaPrincipal) {
-		navigation.navigate('comprarProduto', { paginaPrincipal });
+	function lerQrCode(paginaPrincipal) {
+		navigation.navigate('lerQrCode', { paginaPrincipal });
 	}
 	async function verProduto(paginaPrincipal, id_product) {
 		await AsyncStorage.setItem('id_product', id_product);
@@ -117,7 +117,7 @@ export default function paginaPrincipal({ route, navigation }) {
 						}}
 					>
 						<TouchableOpacity
-							onPress={() => comprarProduto(paginaPrincipal)}
+							onPress={() => lerQrCode(paginaPrincipal)}
 							style={style.divBtn}
 						>
 							<Feather
