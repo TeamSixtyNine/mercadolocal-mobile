@@ -13,17 +13,7 @@ import style from './style';
 export class chatWithUser extends Component {
 	state = {
 		messages: [],
-		// sender: this.props.route.myUserID,
-		// recipient: this.props.route.otherUserID,
 	};
-
-	// get info() {
-	// 	return {
-	// 		_id: Fire.uid,
-	// 		from: this.state.sender,
-	// 		to: this.state.recipient,
-	// 	};
-	// }
 
 	componentDidMount() {
 		const { route, navigation } = this.props;
@@ -31,8 +21,6 @@ export class chatWithUser extends Component {
 		const { myUserID, otherUserID } = route.params;
 
 		Fire.get((message) => {
-			// console.log(message.user.to);
-
 			if (message.user.from == myUserID) {
 				if (message.user.to == otherUserID) {
 					this.setState((previous) => ({
@@ -65,13 +53,14 @@ export class chatWithUser extends Component {
 					_id: Fire.uid,
 					from: myUserID,
 					to: otherUserID,
+					name: 'teste',
 				}}
 			/>
 		);
 
 		return (
 			<View style={style.container}>
-				<Text style={style.user}> {otherUserID}</Text>
+				<Text style={style.user}> Chat com {otherUserID}</Text>
 				<SafeAreaView style={{ flex: 1 }}>{chat}</SafeAreaView>
 			</View>
 		);

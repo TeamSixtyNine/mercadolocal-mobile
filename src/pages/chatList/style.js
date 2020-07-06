@@ -8,11 +8,11 @@ export default StyleSheet.create({
 		flex: 1,
 		width: '100%',
 		backgroundColor: '#7A59C5',
-		paddingHorizontal: 24,
 		paddingTop: Constants.statusBarHeight + 20,
 	},
 
 	titleContainer: {
+		paddingHorizontal: 24,
 		flexDirection: 'row',
 		alignItems: 'center',
 	},

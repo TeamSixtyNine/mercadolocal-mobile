@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import { AppLoading } from 'expo';
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +22,8 @@ export default function paginaPrincipal() {
 	const [checkState, setCheckState] = useState(false);
 	const [localTradeState, setLocalTradeState] = useState(false);
 	const [categoryID, setCategoryID] = useState('');
+	const [friendsInclusion, setFriendsInclusion] = useState(false);
+
 	let [fontsLoaded] = useFonts({
 		Inter_500Medium,
 	});
@@ -46,7 +48,9 @@ export default function paginaPrincipal() {
 			},
 		});
 		const userInfo = await axios.get(
-			`https://api.mercadolibre.com/users/me?access_token=${access_token.split('"')[1]}`
+			`https://api.mercadolibre.com/users/me?access_token=${
+				access_token.split('"')[1]
+			}`
 		);
 		const productData = {
 			post: {
@@ -63,9 +67,9 @@ export default function paginaPrincipal() {
 				},
 				seller_address: {
 					state_id: location.data,
-					city:{
-						name: userInfo.data.address.city
-					}
+					city: {
+						name: userInfo.data.address.city,
+					},
 				},
 				video_id: 'YOUTUBE_ID_HERE',
 				sale_terms: [
@@ -185,11 +189,12 @@ export default function paginaPrincipal() {
 
 				<View style={style.tradeWrapper}>
 					<CheckBox
+						checkboxColor="#000"
 						style={style.checkboxStyle}
 						disabled={false}
 						value={localTradeState}
 						onValueChange={() => {
-							setLocalTradeState(!localTradeState);
+							setFriendsInclusion(!friendsInclusion);
 						}}
 					/>
 
@@ -198,13 +203,33 @@ export default function paginaPrincipal() {
 					</Text>
 				</View>
 
-				<Button
-					onPress={postProduct}
-					title="Postar produto"
-					color="#841584"
-					accessibilityLabel="Learn more about this purple button"
-					style={style.postBtn}
-				/>
+				<View style={style.tradeWrapper}>
+					<CheckBox
+						checkboxColor="#000"
+						style={style.checkboxStyle}
+						disabled={false}
+						value={localTradeState}
+						uncheckedColor="#fff"
+						onValueChange={() => {
+							setLocalTradeState(!localTradeState);
+						}}
+					/>
+
+					<Text style={style.tradeTitle}>Notificar meus amigos</Text>
+				</View>
+
+				<TouchableOpacity onPress={postProduct} style={style.button}>
+					<Text
+						style={{
+							color: '#7A59C5',
+							fontWeight: 'bold',
+							fontSize: 14,
+							textAlign: 'center',
+						}}
+					>
+						POSTAR PRODUTO
+					</Text>
+				</TouchableOpacity>
 			</View>
 		);
 	}

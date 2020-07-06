@@ -84,7 +84,7 @@ export default function chatList({ navigation }) {
 					color="#fff"
 					// onPress={() => sendFriendRequest(paginaPrincipal)}
 				/>
-				<Text style={style.chatTitle}>Chat</Text>
+				<Text style={style.chatTitle}>Chats</Text>
 			</View>
 
 			<SafeAreaView style={style.container}>

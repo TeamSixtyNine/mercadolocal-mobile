@@ -24,15 +24,16 @@ export default StyleSheet.create({
 
 	titleInput: {
 		marginTop: 5,
-		height: 40,
+		height: 50,
 		borderWidth: 1,
 		borderColor: 'white',
 		borderRadius: 10,
-		padding: 10,
+		padding: 12,
 		color: 'white',
 	},
 
 	tradeWrapper: {
+		marginTop: 20,
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
@@ -51,5 +52,17 @@ export default StyleSheet.create({
 		color: 'white',
 		justifyContent: 'center',
 		alignItems: 'center',
+		fontSize: 15,
+	},
+
+	button: {
+		position: 'absolute',
+		bottom: 10,
+		alignSelf: 'center',
+		marginVertical: 12,
+		backgroundColor: '#fff',
+		paddingHorizontal: 28,
+		paddingVertical: 12,
+		borderRadius: 12,
 	},
 });
