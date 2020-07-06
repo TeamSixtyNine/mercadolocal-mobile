@@ -7,6 +7,7 @@ import {
 	FlatList,
 	TouchableOpacity,
 	Picker,
+	ScrollView
 } from 'react-native';
 import { AppLoading } from 'expo';
 import { Feather } from '@expo/vector-icons';
@@ -41,7 +42,6 @@ export default function paginaPrincipal({ route, navigation }) {
 	}
 	async function loadAnuncios(categoria) {
 		const locationCode = await loadLocation();
-		console.log(locationCode.data);
 		const response = await axios.get(
 			`https://api.mercadolibre.com/sites/MLB/search?category=${categoria}&state=${locationCode.data}&limit=10`
 		);
@@ -59,10 +59,6 @@ export default function paginaPrincipal({ route, navigation }) {
 	}
 	function criarProduto(paginaPrincipal) {
 		navigation.navigate('criarProduto', { paginaPrincipal });
-	}
-	async function welcome(paginaPrincipal) {
-		await AsyncStorage.setItem('auth', '');
-		navigation.navigate('welcome', { paginaPrincipal });
 	}
 	function lerQrCode(paginaPrincipal) {
 		navigation.navigate('lerQrCode', { paginaPrincipal });
@@ -82,6 +78,7 @@ export default function paginaPrincipal({ route, navigation }) {
 	}
 
 	useEffect(() => {
+		setValorSelecionado("MLB1051")
 		loadAnuncios(valorSelecionado);
 	}, [valorSelecionado]);
 
@@ -109,123 +106,127 @@ export default function paginaPrincipal({ route, navigation }) {
 						/>
 					</View>
 				</View>
-				<View style={style.divBtns}>
-					<View
-						style={{
-							alignItems: 'center',
-							justifyContent: 'flex-start',
-						}}
-					>
-						<TouchableOpacity
-							onPress={() => lerQrCode(paginaPrincipal)}
-							style={style.divBtn}
-						>
-							<Feather
-								name="command"
-								size={20}
-								color="#fff"
-							/>
-						</TouchableOpacity>
-						<Text style={style.txtBtn}>Ler QRCode</Text>
-					</View>
-					<View
-						style={{
-							alignItems: 'center',
-							justifyContent: 'flex-start',
-						}}
-					>
-						<TouchableOpacity
-							onPress={() => listaDeEspera(paginaPrincipal)}
-							style={style.divBtn}
-						>
-							<Feather
-								name="shopping-bag"
-								size={20}
-								color="#fff"
-							/>
-						</TouchableOpacity>
-						<Text style={style.txtBtn}>Lista de espera</Text>
-					</View>
-					<View
-						style={{
-							alignItems: 'center',
-							justifyContent: 'flex-start',
-						}}
-					>
-						<TouchableOpacity
-							onPress={() => {
-								chatList(paginaPrincipal);
+				<ScrollView
+					horizontal={true}
+					style={{
+						height: 180,
+					}}
+				>
+					<View style={style.divBtns}>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'flex-start',
 							}}
-							style={style.divBtn}
 						>
-							<Feather
-								name="message-circle"
-								size={20}
-								color="#fff"
-							/>
-						</TouchableOpacity>
-						<Text style={style.txtBtn}>Chat</Text>
-					</View>
-				</View>
-				<View style={style.divBtns}>
-					<View
-						style={{
-							alignItems: 'center',
-							justifyContent: 'flex-start',
-						}}
-					>
-						<TouchableOpacity
-							onPress={() => criarProduto(paginaPrincipal)}
-							style={style.divBtn}
+							<TouchableOpacity
+								onPress={() => lerQrCode(paginaPrincipal)}
+								style={style.divBtn}
+							>
+								<Feather
+									name="command"
+									size={20}
+									color="#fff"
+								/>
+							</TouchableOpacity>
+							<Text style={style.txtBtn}>Ler QRCode</Text>
+						</View>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'flex-start',
+							}}
 						>
-							<Feather
-								name="plus"
-								size={20}
-								color="#fff"
-							/>
-						</TouchableOpacity>
-						<Text style={style.txtBtn}>Criar anúncio</Text>
-					</View>
-					<View
-						style={{
-							alignItems: 'center',
-							justifyContent: 'flex-start',
-						}}
-					>
-						<TouchableOpacity
-							onPress={() => verPerfil(paginaPrincipal)}
-							style={style.divBtn}
+							<TouchableOpacity
+								onPress={() => listaDeEspera(paginaPrincipal)}
+								style={style.divBtn}
+							>
+								<Feather
+									name="shopping-bag"
+									size={20}
+									color="#fff"
+								/>
+							</TouchableOpacity>
+							<Text style={style.txtBtn}>Lista de espera</Text>
+						</View>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'flex-start',
+							}}
 						>
-							<Feather name="user" size={20} color="#fff" />
-						</TouchableOpacity>
-						<Text style={style.txtBtn}>Ver perfil</Text>
-					</View>
-					<View
-						style={{
-							alignItems: 'center',
-							justifyContent: 'flex-start',
-						}}
-					>
-						<TouchableOpacity
-							onPress={() => welcome(paginaPrincipal)}
-							style={style.divBtn}
+							<TouchableOpacity
+								onPress={() => {
+									chatList(paginaPrincipal);
+								}}
+								style={style.divBtn}
+							>
+								<Feather
+									name="message-circle"
+									size={20}
+									color="#fff"
+								/>
+							</TouchableOpacity>
+							<Text style={style.txtBtn}>Chat</Text>
+						</View>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'flex-start',
+							}}
 						>
-							<Feather
-								name="user-minus"
-								size={20}
-								color="#fff"
-							/>
-						</TouchableOpacity>
-						<Text style={style.txtBtn}>Logout</Text>
+							<TouchableOpacity
+								onPress={() => criarProduto(paginaPrincipal)}
+								style={style.divBtn}
+							>
+								<Feather
+									name="plus"
+									size={20}
+									color="#fff"
+								/>
+							</TouchableOpacity>
+							<Text style={style.txtBtn}>Criar anúncio</Text>
+						</View>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'flex-start',
+							}}
+						>
+							<TouchableOpacity
+								onPress={() => verPerfil(paginaPrincipal)}
+								style={style.divBtn}
+							>
+								<Feather name="user" size={20} color="#fff" />
+							</TouchableOpacity>
+							<Text style={style.txtBtn}>Ver perfil</Text>
+						</View>
+						<View
+							style={{
+								alignItems: 'center',
+								justifyContent: 'flex-start',
+							}}
+						>
+							<TouchableOpacity
+								onPress={() => {}}
+								style={style.divBtn}
+							>
+								<Feather
+									name="user-plus"
+									size={20}
+									color="#fff"
+								/>
+							</TouchableOpacity>
+							<Text style={style.txtBtn}>Ver amigos</Text>
+						</View>
 					</View>
-				</View>
+				</ScrollView>
 				<Picker
 					selectedValue={valorSelecionado}
 					onValueChange={(itemValue) =>
 						setValorSelecionado(itemValue)
 					}
 				>
-					<Picker.Item label="SELECIONE UMA CATEGORIA" value="" />
 					<Picker.Item
 						label="Acessórios de Veículos"
 						value="MLB5672"
